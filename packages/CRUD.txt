@@ -1,0 +1,24 @@
+from blog.models import Post
+
+# Create
+Post.objects.create(title="Test", content="Hello")
+
+# Read All
+posts = Post.objects.all()
+
+# Read only 1
+Post.objects.get(id=1)
+
+# Afficher
+for p in posts:
+    print(p.title)
+
+# Update
+post = Post.objects.get(id=1)
+post.title = "Modifié"
+post.save()
+
+# Delete : 
+post.delete()
+
+

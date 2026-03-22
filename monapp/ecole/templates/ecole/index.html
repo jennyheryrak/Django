@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecole | Mon App</title>
+</head>
+<body>
+    <h1>Mon école</h1>
+    <h2>Liste élèves</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nom complet</th>
+                <th>Age</th>
+                <th>Sexe</th>
+                <th>Date de naissance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in eleve %}
+            <tr>
+                <td>{{ e.nomcomplet }}</td>
+                <td>{{ e.age }}</td>
+                {% if e.sexe == 'H' %}
+                <td>Homme</td>
+                {% else %}
+                <td>Femme</td>
+                {% endif %}
+                
+                <td>{{ e.datenaissance }}</td>
+                <td>
+                    <a href="">Modifier</a>
+                    <span> | </span>
+                    <a href="{% url 'supprimer' id=e.id %}">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

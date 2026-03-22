@@ -1,0 +1,75 @@
+python3 -m venv env
+source env/bin/activate
+pip install django
+django-admin --version
+django-admin startproject monsite
+cd monsite
+python manage.py runserver
+
+---
+python manage.py startapp blog
+INSTALLED_APPS = ['blog']
+
+
+--- DB :
+python manage.py makemigrations
+python manage.py migrate
+
+--- Admin
+python manage.py createsuperuser
+
+
+--- APP
+python manage.py startapp blog
+
+--- Steps
+# blog/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+]
+
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Bienvenue sur le blog 🚀")
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('blog/', include('blog.urls')),  # 👈 AJOUT ICI
+]
+
+
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'blog/home.html')
+
+
+def home(request):
+    return render(request, 'blog/home.html', {
+        'nom': 'Jenny'
+    })
+
+
+<h1>Bienvenue {{ nom }} 👋</h1>
+
+
+
+
+
+
+from django.db import models
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
