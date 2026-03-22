@@ -7,6 +7,12 @@
 </head>
 <body>
     <h1>Mon école</h1>
+    <h2>Ajout élève</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Ajouter</button>
+    </form>
     <h2>Liste élèves</h2>
     <table border="1">
         <thead>
@@ -31,7 +37,7 @@
                 
                 <td>{{ e.datenaissance }}</td>
                 <td>
-                    <a href="">Modifier</a>
+                    <a href="{% url 'modifier' id=e.id %}">Modifier</a>
                     <span> | </span>
                     <a href="{% url 'supprimer' id=e.id %}">Supprimer</a>
                 </td>
